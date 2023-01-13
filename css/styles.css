@@ -18,8 +18,14 @@ a{
     font-family: 'Roboto-Regular', sans-serif;
 }
 
+body{
+    display: flex;
+    justify-content: center;
+}
+
 .wrapper{
     width: 100%;
+    max-width: 1000px;
 }
 
 a:hover{
@@ -45,7 +51,7 @@ a:hover{
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 2rem;
-    justify-content: center;
+    justify-content: normal;
 }
 
 @media (max-width: 900px) {
