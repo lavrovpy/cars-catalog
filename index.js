@@ -4,11 +4,12 @@ const appBody = document.getElementById("app");
 
 const gallery = document.getElementById("cars");
 
-for (const car of cars) {
-  const carContainer = document.createElement("figure");
-  carContainer.classList.add("gallery-item");
+function renderCars(carsToRender) {
+  for (const car of carsToRender) {
+    const carContainer = document.createElement("figure");
+    carContainer.classList.add("gallery-item");
 
-  carContainer.innerHTML = `<a href="${car.url}">
+    carContainer.innerHTML = `<a href="${car.url}">
    <img
      class="gallery-image"
      src="${car.image}"
@@ -16,23 +17,39 @@ for (const car of cars) {
    <figcaption>${car.name}</figcaption>
  </a>`;
 
-  gallery.appendChild(carContainer);
-
-  // for (const car of cars) {
-  //   const carContainer = document.createElement("figure");
-  //   carContainer.classList.add("gallery-item");
-
-  //   const carImage = document.createElement("img");
-  //   carImage.setAttribute("src", car.image);
-  //   carContainer.appendChild(carImage);
-  //   carImage.setAttribute("alt", `This is the photo of ${car.name}`);
-  //   carImage.classList.add("gallery-image");
-
-  //   const a = document.createElement("a");
-  //   a.innerHTML = `<figcaption>${car.name}</figcaption>`;
-  //   a.setAttribute("href", car.url);
-  //   a.setAttribute("target", "_blank");
-  //   carContainer.appendChild(a);
-
-  //   gallery.appendChild(carContainer);
+    gallery.appendChild(carContainer);
+  }
 }
+
+const searchBar = document.getElementById("search-box");
+
+searchBar.addEventListener("blur", hadleUserInput);
+
+searchBar.addEventListener("keyup", function (event) {
+  console.log("event", event);
+  if (event.key === "Enter") {
+    hadleUserInput(event);
+  }
+});
+
+function hadleUserInput(event) {
+  const searchRequest = event.target.value;
+
+  if (searchRequest && searchRequest.length > 1) {
+    const filteredCars = cars.filter((car) => {
+      return car.name.toLowerCase() === searchRequest.toLowerCase();
+    });
+    removeElements(gallery);
+    renderCars(filteredCars);
+  } else {
+    renderCars(cars);
+  }
+}
+
+function removeElements(parentElement) {
+  while (parentElement.lastChild) {
+    parentElement.removeChild(parentElement.lastChild);
+  }
+}
+
+renderCars(cars);
