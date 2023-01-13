@@ -5,7 +5,20 @@ const appBody = document.getElementById('app')
 const gallery = document.getElementById('cars')
 
 for(const car of cars){
+
     const carConrainer = document.createElement('figure')
+    carConrainer.classList.add('gallery-item')
+
+    carConrainer.innerHTML = `
+        <a href="${car.url}">
+        
+        <img class="gallery-image" src="${car.image}" />
+        <figcaption>${car.name}</figcaption>
+        </a>
+`
+gallery.appendChild(carConrainer)
+
+    /* const carConrainer = document.createElement('figure')
     carConrainer.classList.add('gallery-item')
 
     const carImage = document.createElement('img')
@@ -20,6 +33,6 @@ for(const car of cars){
     a.setAttribute('target', '_blank')
     carConrainer.appendChild(a)
 
-    gallery.appendChild(carConrainer)
+    gallery.appendChild(carConrainer)*/
 }
-
+ 
