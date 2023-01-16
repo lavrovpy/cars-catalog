@@ -1,4 +1,6 @@
-import cars from './data.js'
+import data from './data.js'
+
+let cars = JSON.parse(JSON.stringify(data))
 
 const appBody = document.getElementById('app')
 
@@ -10,15 +12,25 @@ function renderCars(carsToRender){
         carConrainer.classList.add('gallery-item')
     
         carConrainer.innerHTML = `
+            <button
+                data-id="${car.id}"
+                id="delete-btn"
+            >Delete Car</button>
+            <img
+                class="gallery-image"
+                src="${car.image}"
+            />
             <a href="${car.url}">
-                <img
-                    class="gallery-image"
-                    src="${car.image}"
-                />
-                <figcaption>${car.name}</figcaption>
+                <figcaption>${car.name}, ${car.year}</figcaption>
             </a>
         `
         gallery.appendChild(carConrainer)
+    }
+
+    const deleBtns = document.querySelectorAll('#delete-btn');
+
+    for(const el of deleBtns){
+        el.addEventListener('click', deleteCar)
     }
 }
 
@@ -54,3 +66,13 @@ function removeElements(parentElement){
 }
 
 renderCars(cars)
+
+function deleteCar(event){
+    const carIdToDelete = event.target.dataset.id;
+    const filteredCars = cars.filter(function(car){
+        return car.id.toString() !== carIdToDelete;
+    })
+    removeElements(gallery)
+    cars = filteredCars;
+    renderCars(cars)
+}
