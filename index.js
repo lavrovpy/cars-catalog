@@ -1,27 +1,28 @@
 import data from './data.js'
+import { filterDuplicates, sortArray, removeElements } from './utils.js'
 
 let cars = JSON.parse(JSON.stringify(data));
-
-const appBody = document.getElementById('app')
-
-const allYears = data.map(function(car){
+const carsYears = data.map(function(car){
     return car.year;
 })
 
-const uniqueYears = Array.from(new Set(allYears));
-/* for(const year of allYears){
-    if(!uniqueYears.includes(year)){
-        uniqueYears.push(year)
+const searchBar = document.getElementById('search')
+searchBar.addEventListener('blur', hadleUserInput)
+searchBar.addEventListener('keyup', function(event){
+    if(event.key === 'Enter'){
+        hadleUserInput(event)
     }
-} */
-
-const sortedYears = uniqueYears.sort((a, b) => {
-    return a - b
 })
 
-const gallery = document.getElementById('cars')
+const carYearSelector = document.querySelector('#car-selector')
+renderSelectorOptions(carYearSelector, carsYears)
+carYearSelector.addEventListener('change', handleYearSelection)
 
-function renderCars(carsToRender){
+// initally render all cars
+const carsGallery = document.getElementById('cars-gallery')
+renderCars(carsGallery, cars)
+
+function renderCars(parentElement, carsToRender){
     for(const car of carsToRender){
         const carConrainer = document.createElement('figure')
         carConrainer.classList.add('gallery-item')
@@ -30,7 +31,9 @@ function renderCars(carsToRender){
             <button
                 data-id="${car.id}"
                 id="delete-btn"
-            >Delete Car</button>
+            >
+                Delete Car
+            </button>
             <img
                 class="gallery-image"
                 src="${car.image}"
@@ -39,80 +42,56 @@ function renderCars(carsToRender){
                 <figcaption>${car.name}, ${car.year}</figcaption>
             </a>
         `
-        gallery.appendChild(carConrainer)
+        parentElement.appendChild(carConrainer)
     }
 
     const deleBtns = document.querySelectorAll('#delete-btn');
-
     for(const el of deleBtns){
         el.addEventListener('click', deleteCar)
     }
 }
 
-const searchBar = document.getElementById('search')
-
-searchBar.addEventListener('blur', hadleUserInput)
-
-searchBar.addEventListener('keyup', function(event){
-    if(event.key === 'Enter'){
-        hadleUserInput(event)
-    }
-})
-
 function hadleUserInput(event){
     const searchRequest = event.target.value;
+    removeElements(carsGallery)
 
     if(searchRequest && searchRequest.length > 1){
         const fiteredCars = cars.filter(car => {
             return car.name.toLocaleLowerCase() === searchRequest.toLocaleLowerCase()
         });
-        removeElements(gallery)
-        renderCars(fiteredCars)
+        renderCars(carsGallery, fiteredCars)
     } else{
-        removeElements(gallery)
-        renderCars(cars)
+        renderCars(carsGallery, cars)
     }
 }
-
-function removeElements(parentElement){
-    while(parentElement.lastChild){
-        parentElement.removeChild(parentElement.lastChild)
-    }
-}
-
-renderCars(cars)
 
 function deleteCar(event){
     const carIdToDelete = event.target.dataset.id;
     const filteredCars = cars.filter(function(car){
         return car.id.toString() !== carIdToDelete;
     })
-    removeElements(gallery)
+    removeElements(carsGallery)
     cars = filteredCars;
-    renderCars(cars)
+    renderCars(carsGallery, cars)
 }
 
-const carYearSelector = document.querySelector('#car-selector')
-carYearSelector.addEventListener('change', handleYearSelection)
-
-function renderSelectorOptions(parentElement){
-    for(const year of sortedYears){
+function renderSelectorOptions(parentElement, data){
+    const fiteredData = filterDuplicates(data);
+    const sortedData = sortArray(fiteredData, 'desc');
+    for(const el of sortedData){
         const option = document.createElement('option')
-        option.innerHTML = year
-        option.setAttribute('value', year)
+        option.innerHTML = el
+        option.setAttribute('value', el)
         parentElement.appendChild(option)
     }
 }
 
-renderSelectorOptions(carYearSelector)
-
 function handleYearSelection(event){
-    debugger;
     const selectedYear = event.target.value;
     const filteredCars = data.filter(
         car => car.year.toString() === selectedYear
     )
-    removeElements(gallery)
+    removeElements(carsGallery)
     cars = filteredCars;
-    renderCars(cars)
+    renderCars(carsGallery, cars)
 }
