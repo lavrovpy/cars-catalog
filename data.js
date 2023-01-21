@@ -1,5 +1,6 @@
 export default [
     {
+        id: 1,
         name: 'Jeep',
         url: 'https://www.jeep.com/',
         image: './images/pexels-aaron-curtis-119435.jpg',
@@ -10,6 +11,7 @@ export default [
         tank: 60,
     },
     {
+        id: 2,
         name: 'Dodge',
         url: 'https://www.dodge.com/',
         image: './images/pexels-garvin-st-villier-3311574.jpg',
@@ -20,6 +22,7 @@ export default [
         tank: 50,
     },
     {
+        id: 3,
         name: 'Lada',
         url: 'https://en.wikipedia.org/wiki/Lada',
         image: './images/pexels-johnmark-smith-253096.jpg',
@@ -30,6 +33,7 @@ export default [
         tank: 40,
     },
     {
+        id: 4,
         name: 'Mercedes',
         url: 'https://www.mercedes-benz.com/en/',
         image: './images/pexels-mike-b-112460.jpg',
@@ -40,6 +44,7 @@ export default [
         tank: 60,
     },
     {
+        id: 5,
         name: 'BMW',
         url: 'https://www.bmw.com/en/index.html',
         image: './images/pexels-mike-b-170811.jpg',
@@ -50,6 +55,7 @@ export default [
         tank: 50,
     },
     {
+        id: 6,
         name: 'Audi',
         url: 'https://www.audi.com/en.html',
         image: './images/pexels-mike-b-1035108.jpg',
@@ -60,6 +66,7 @@ export default [
         tank: 50,
     },
     {
+        id: 7,
         name: 'Mercedes',
         url: 'https://www.mercedes-benz.com/en/',
         image: './images/pexels-mike-b-2365572.jpg',
@@ -70,6 +77,7 @@ export default [
         tank: 60,
     },
     {
+        id: 8,
         name: 'Mini Cooper',
         url: 'https://www.mini.com/en_MS/home.html',
         image: './images/pexels-pixabay-35967.jpg',
@@ -80,6 +88,7 @@ export default [
         tank: 40,
     },
     {
+        id: 9,
         name: 'Hyundai',
         url: 'https://www.hyundai.com/worldwide/en/',
         image: './images/pexels-s-von-hoerst-2920064.jpg',
@@ -90,6 +99,7 @@ export default [
         tank: 50,
     },
     {
+        id: 10,
         name: 'BMW',
         url: 'https://www.bmw.com/en/index.html',
         image: './images/pexels-torsten-dettlaff-70912.jpg',
@@ -100,6 +110,7 @@ export default [
         tank: 60,
     },
     {
+        id: 11,
         name: 'BMW',
         url: 'https://www.bmw.com/en/index.html',
         image: './images/pexels-trace-constant-707046.jpg',
