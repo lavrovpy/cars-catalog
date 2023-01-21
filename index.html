@@ -8,15 +8,25 @@
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
 </head>
 <body>
-    <div id="app" class="wrapper">
+    <main id="app" class="wrapper">
         <h1 class="headline">Cars Gallery</h1>
         <h3 class="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
         <div>
             <label for="search">Search:</label>
             <input id="search" name="search" value="" placeholder="Enter search request..." />
         </div>
+        <div>
+            <label for="car-selector">Select Year:</label>
+            <select
+                id="car-selector"
+                name="car-selector"
+                placeholder="Enter search request..."
+                value=""
+            >
+            </select>
+        </div>
         <div id="cars" class="gallery"></div>
-    </div>
+    </main>
     <script src="./index.js" type="module"></script>
 </body>
 </html>
